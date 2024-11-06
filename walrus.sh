@@ -11,7 +11,7 @@ YELLOW='\033[1;33m'
 CYAN='\033[0;36m'
 NC='\033[0m' # 색상 초기화
 
-echo -e "${GREEN}Drops 봇을 설치합니다.${NC}"
+echo -e "${GREEN}walrus 봇을 설치합니다.${NC}"
 echo -e "${GREEN}스크립트작성자: https://t.me/kjkresearch${NC}"
 echo -e "${GREEN}출처:https://github.com/Widiskel/walrus-testnet-bot${NC}"
 
@@ -127,7 +127,7 @@ case $choice in
     ;;
     
   2)
-    echo -e "${GREEN}봇을 재실행합니다.${NC}"
+    echo -e "${GREEN}walrus봇을 재실행합니다.${NC}"
     
     # nvm을 로드합니다
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # nvm을 로드합니다
