@@ -106,7 +106,7 @@ case $choice in
 
     # 쉼표로 구분된 개인키를 줄바꿈으로 변환
     {
-        echo "export const privateKeys = ["  # 파일 시작
+        echo "export const privateKey = ["  # 파일 시작
         IFS=','  # 구분자를 쉼표로 설정
         first=true  # 첫 번째 요소 여부 확인
         for key in $keys_input; do
