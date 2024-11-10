@@ -101,24 +101,27 @@ case $choice in
     echo -e "${YELLOW}프록시의 숫자와 개인키의 숫자가 같아야 합니다.${NC}"
     echo -e "${YELLOW}입력을 마치려면 엔터를 두 번 누르세요.${NC}"
 
-    # 개인키 입력 받기
-    read -p "개인키 입력: " keys_input
-    # 쉼표로 구분된 개인키를 줄바꿈으로 변환
-    {
-        echo "export const privateKey = ["  # 파일 시작
-        IFS=','  # 구분자를 쉼표로 설정
-        first=true  # 첫 번째 요소 여부 확인
-        for key in $keys_input; do
-            key=$(echo "$key" | xargs)  # 공백 제거
-            if [ "$first" = true ]; then
-                echo "  \"$key\""
-                first=false
-            else
-                echo "  \"$key\","
-            fi
-        done
-        echo "];"  # 배열 끝
-    } > "$WORK/accounts/accounts.js"
+# 개인키 입력 받기
+read -p "개인키 입력 (쉼표로 구분): " keys_input
+
+{
+    echo "export const privateKey = ["
+    IFS=','
+    keys=($keys_input)
+    total=${#keys[@]}
+    count=1
+    
+    for key in "${keys[@]}"; do
+        key=$(echo "$key" | xargs)
+        if [ $count -eq $total ]; then
+            echo "  \"$key\""  # 마지막 키는 콤마 없음
+        else
+            echo "  \"$key\","  # 마지막이 아닌 키는 콤마 추가
+        fi
+        count=$((count + 1))
+    done
+    echo "];"
+} > "$WORK/accounts/accounts.js"
 
     # 봇 구동
     npm run start
